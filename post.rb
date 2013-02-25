@@ -11,7 +11,7 @@ require "pry"
 
 
 def line_to_hash(line, delimiter, keys)
-  values = line.split(delimiter)
+  values = line.chomp.split(delimiter)
   values_hash = Hash[keys.zip(values)]
 end
 
@@ -33,6 +33,8 @@ pipe_keys = ["lastName", "firstName", "middleInitial", "gender", "favoriteColor"
 parse_file('comma.txt', ', ', comma_keys)
 parse_file('space.txt', ' ', space_keys)
 parse_file('pipe.txt', ' | ', pipe_keys)
+
+
 
 
 

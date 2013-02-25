@@ -1,0 +1,49 @@
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+
+<table>
+
+
+  <tr class = "headings">
+    <td>Last Name</td>
+
+    <td>First Name</td>
+
+    <td>Gender</td>
+
+    <td>Birth Date</td>
+
+    <td>Favorite Color</td>
+  </tr>
+
+
+  <% @all.each do |row| %>
+  <tr>
+
+    <td><%=row.lastName%></td>
+
+    <td><%=row.firstName%></td>
+
+    <td><%=row.gender%></td>
+
+    <td><%=row.dateOfBirth%></td>
+
+    <td><%=row.favoriteColor%></td>
+
+
+
+  </tr>
+
+  <% end %>
+
+</body>
+
+
+
+</table>
