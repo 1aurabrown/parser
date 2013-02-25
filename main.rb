@@ -28,12 +28,12 @@ class ParseApp < Sinatra::Base
   end
 
   get '/output1' do
-    @all = Parse.all
+    @all= Parse.all
     erb :output1
   end
 
   get '/output2' do
-    @all = Parse.all
+    @all_by_dob = Parse.all(:order => [ :dateOfBirth.asc ])
     erb :output2
   end
 
@@ -45,13 +45,14 @@ class ParseApp < Sinatra::Base
 
   post '/' do
     params.delete("middleInitial")
-    params["dateOfBirth"] =params["dateOfBirth"].gsub('-', '/')
-    puts params["dateOfBirth"]
+    dob =params["dateOfBirth"].gsub('-', '/')
+    params["dateOfBirth"] = DateTime.strptime(dob, "%d/%m/%Y")
     params["gender"] = params["gender"][0].upcase
 
     table_row = Parse.new(params)
+        binding.pry
     table_row.save
-    binding.pry
+
   end
 end
 
@@ -62,7 +63,7 @@ class Parse
   property :id,             Serial        # Auto-increment integer id
   property :lastName,       String        # A short string of text
   property :firstName,      String        # A short string of text
-  property :dateOfBirth,    String        # A short string of text
+  property :dateOfBirth,    DateTime      # A short string of text
   property :favoriteColor,  String        # A short string of text
   property :gender,         String        # A short string of text
   property :created_at,     DateTime      # Auto assigns data/time

@@ -20,7 +20,8 @@ def parse_file(input_file, delimiter, keys)
   file = File.open(input_file)
   file.each_line do |line|
     values_hash = line_to_hash(line, delimiter, keys)
-    Net::HTTP.post_form(@@uri, values_hash)
+    response = Net::HTTP.post_form(@@uri, values_hash)
+    binding.pry
   end
 end
 
@@ -31,8 +32,8 @@ pipe_keys = ["lastName", "firstName", "middleInitial", "gender", "favoriteColor"
 
 
 parse_file('comma.txt', ', ', comma_keys)
-parse_file('space.txt', ' ', space_keys)
-parse_file('pipe.txt', ' | ', pipe_keys)
+#parse_file('space.txt', ' ', space_keys)
+#parse_file('pipe.txt', ' | ', pipe_keys)
 
 
 
